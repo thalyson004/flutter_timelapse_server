@@ -2,6 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_timelapse/widgets/camera_card.dart';
+import 'package:flutter_timelapse/widgets/mydrawer.dart';
+
+import '../widgets/mybar.dart';
 
 class Home extends StatefulWidget {
   static String route = "/home";
@@ -53,20 +56,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: Container(
-          child: Column(
-            children: const [
-              Text("Home"),
-              Text("Add camera"),
-              Text("Sobre"),
-            ],
-          ),
-        ),
-      ),
-      appBar: AppBar(
-        title: const Center(child: Text("TimeLapse App")),
-      ),
+      drawer: const MyDrawer(),
+      appBar: const MyBar(),
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
         color: Colors.pink,
