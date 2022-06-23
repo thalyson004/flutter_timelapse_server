@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../pages/about.dart';
+
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
 
@@ -23,7 +25,7 @@ class MyDrawer extends StatelessWidget {
             DrawerTile(
                 text: "About",
                 onTap: () {
-                  print("About");
+                  showAbout(context);
                 }),
           ],
         ),
