@@ -15,7 +15,7 @@ class MyDrawer extends StatelessWidget {
             DrawerTile(
                 text: "Home",
                 onTap: () {
-                  print("Home");
+                  Navigator.of(context).pop();
                 }),
             DrawerTile(
                 text: "Add camera",
