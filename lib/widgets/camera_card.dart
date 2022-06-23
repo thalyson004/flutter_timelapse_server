@@ -18,17 +18,24 @@ class _CameraCardState extends State<CameraCard> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-
-    return Container(
-      height: width / 3 - 20,
-      width: width / 3 - 20,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.fill,
-          image: widget.ip != null
-              ? NetworkImage("http://${widget.ip}/capture")
-              : const NetworkImage(
-                  "https://i.ytimg.com/vi/w6geNk3QnBQ/maxresdefault.jpg"),
+    double side = (width / 3) - 3 * 2 * 8;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: side,
+        width: side,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black,
+            width: 3,
+          ),
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: widget.ip != null
+                ? NetworkImage("http://${widget.ip}/capture")
+                : const NetworkImage(
+                    "https://i.ytimg.com/vi/w6geNk3QnBQ/maxresdefault.jpg"),
+          ),
         ),
       ),
     );

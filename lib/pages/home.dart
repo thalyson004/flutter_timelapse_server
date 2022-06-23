@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
       int j = min(cameras.length, i + 3);
       rows.add(
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: cameras.sublist(i, j),
         ),
       );
@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
         title: const Center(child: Text("TimeLapse App")),
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
         color: Colors.pink,
         child: divideInRows(),
       ),
