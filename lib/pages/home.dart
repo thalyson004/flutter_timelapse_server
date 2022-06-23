@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_timelapse/widgets/camera_card.dart';
 
@@ -21,7 +23,31 @@ class _HomeState extends State<Home> {
       //CameraCard(ip: "192.168.1.112"),
       CameraCard(ip: "192.168.1.113"),
       CameraCard(),
+      CameraCard(),
+      CameraCard(),
+      CameraCard(),
+      CameraCard(),
+      CameraCard(),
+      CameraCard(),
     ];
+  }
+
+  Widget divideInRows() {
+    List<Widget> rows = [];
+
+    for (int i = 0; i < cameras.length; i += 3) {
+      int j = min(cameras.length, i + 3);
+      rows.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: cameras.sublist(i, j),
+        ),
+      );
+    }
+
+    return ListView(
+      children: rows,
+    );
   }
 
   @override
@@ -44,14 +70,7 @@ class _HomeState extends State<Home> {
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         color: Colors.pink,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: cameras,
-            )
-          ],
-        ),
+        child: divideInRows(),
       ),
     );
   }
