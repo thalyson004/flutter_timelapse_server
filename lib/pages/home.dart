@@ -17,9 +17,10 @@ class _HomeState extends State<Home> {
   void initState() {
     //TODO: build the camera cards
     cameras = [
-      CameraCard(ip: "0.0.0.0"),
-      CameraCard(ip: "0.0.0.0"),
-      CameraCard(ip: "0.0.0.0"),
+      CameraCard(ip: "192.168.1.111"),
+      //CameraCard(ip: "192.168.1.112"),
+      CameraCard(ip: "192.168.1.113"),
+      CameraCard(),
     ];
   }
 
@@ -29,7 +30,7 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: Container(
           child: Column(
-            children: [
+            children: const [
               Text("Home"),
               Text("Add camera"),
               Text("Sobre"),
