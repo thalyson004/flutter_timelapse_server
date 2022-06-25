@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_timelapse/pages/add.dart';
 
 import '../pages/about.dart';
 
@@ -20,7 +21,7 @@ class MyDrawer extends StatelessWidget {
             DrawerTile(
                 text: "Add camera",
                 onTap: () {
-                  print("Add");
+                  showAdd(context);
                 }),
             DrawerTile(
                 text: "About",

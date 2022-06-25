@@ -25,7 +25,6 @@ Widget aboutDialog(BuildContext context) {
           SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
                   children: const [

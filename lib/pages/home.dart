@@ -1,9 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_timelapse/widgets/camera_card.dart';
 import 'package:flutter_timelapse/widgets/mydrawer.dart';
+import 'package:provider/provider.dart';
 
+import '../db/db.dart';
 import '../widgets/mybar.dart';
 
 class Home extends StatefulWidget {
@@ -16,42 +15,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<CameraCard> cameras = [];
-
   @override
-  void initState() {
-    //TODO: build the camera cards
-    cameras = [
-      CameraCard(ip: "192.168.1.111"),
-      //CameraCard(ip: "192.168.1.112"),
-      CameraCard(ip: "192.168.1.113"),
-      CameraCard(),
-      CameraCard(),
-      CameraCard(),
-      CameraCard(),
-      CameraCard(),
-      CameraCard(),
-      CameraCard(),
-    ];
-  }
-
-  Widget divideInRows() {
-    List<Widget> rows = [];
-
-    for (int i = 0; i < cameras.length; i += 3) {
-      int j = min(cameras.length, i + 3);
-      rows.add(
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: cameras.sublist(i, j),
-        ),
-      );
-    }
-
-    return ListView(
-      children: rows,
-    );
-  }
+  void initState() {}
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +26,7 @@ class _HomeState extends State<Home> {
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
         color: Colors.pink,
-        child: divideInRows(),
+        child: Provider.of<DB>(context, listen: true).cameraCardsInRows,
       ),
     );
   }
