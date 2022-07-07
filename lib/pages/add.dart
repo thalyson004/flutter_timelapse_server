@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_timelapse/widgets/mytextinput.dart';
 import 'package:provider/provider.dart';
 
 import '../db/db.dart';
@@ -13,14 +14,15 @@ void showAdd(BuildContext context) {
 }
 
 Widget addDialog(BuildContext context) {
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController ipController = TextEditingController();
+  final TextEditingController internvalController = TextEditingController();
 
   return Dialog(
     backgroundColor: Colors.transparent,
     //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
     child: ConstrainedBox(
       constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.3,
+        maxHeight: MediaQuery.of(context).size.height * 0.4,
         minHeight: MediaQuery.of(context).size.height * 0.1,
         minWidth: MediaQuery.of(context).size.width * 0.1,
         maxWidth: MediaQuery.of(context).size.width * 0.4,
@@ -52,63 +54,20 @@ Widget addDialog(BuildContext context) {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 20, horizontal: 10),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.max,
                       children: [
-                        Expanded(
-                          child: TextField(
-                            controller: controller,
-                            onChanged: (value) {},
-                            style: const TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
-                              errorText: null,
-                              errorStyle: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.red,
-                              ),
-                              filled: true,
-                              fillColor: const Color(0x45000000),
-                              disabledBorder: InputBorder.none,
-                              border: const OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                borderSide: BorderSide.none,
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              errorBorder: const OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                borderSide: BorderSide(
-                                  color: Colors.red,
-                                ),
-                              ),
-                              hintText: "Ip Address",
-                              hintStyle: TextStyle(
-                                color: Colors.white.withOpacity(0.3),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
+                        MyTextInput(
+                          controller: ipController,
+                          hitText: "Ip Address",
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: GestureDetector(
-                            child: const Icon(
-                              Icons.add,
-                              color: Colors.white,
-                            ),
-                            onTap: () {
-                              Provider.of<DB>(context, listen: false)
-                                  .addCamera(controller.text);
-                              print("Cameras: ${DB().cameras.length}");
-                            },
-                          ),
+                        const Divider(
+                          height: 20,
+                        ),
+                        MyTextInput(
+                          controller: ipController,
+                          hitText: "Interval",
                         ),
                       ],
                     ),
@@ -116,18 +75,35 @@ Widget addDialog(BuildContext context) {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20, right: 20),
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: TextButton(
-                  child: const Text(
-                    "RETURN",
-                    style: TextStyle(fontSize: 16, color: Colors.white),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10, right: 10),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      child: const Text(
+                        "CANCEL",
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
+                      child: const Text(
+                        "ADD",
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Provider.of<DB>(context, listen: false).addCamera(
+                            ipController.text, internvalController.text);
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
                 ),
               ),
             )

@@ -67,8 +67,8 @@ class DB extends ChangeNotifier {
     );
   }
 
-  void addCamera(String ip) {
+  void addCamera(String ip, String interval) {
     _cameras.add(Camera(ip: ip));
-    notifyListeners();
+    initCameras();
   }
 }
