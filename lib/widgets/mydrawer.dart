@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_timelapse/pages/add.dart';
 
 import '../pages/about.dart';
+import '../pages/login.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -11,24 +12,31 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       child: Container(
         color: Colors.blue,
-        child: Column(
-          children: [
-            DrawerTile(
-                text: "Home",
-                onTap: () {
-                  Navigator.of(context).pop();
-                }),
-            DrawerTile(
-                text: "Add camera",
-                onTap: () {
-                  showAdd(context);
-                }),
-            DrawerTile(
-                text: "About",
-                onTap: () {
-                  showAbout(context);
-                }),
-          ],
+        child: SafeArea(
+          child: Column(
+            children: [
+              DrawerTile(
+                  text: "Home",
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              DrawerTile(
+                  text: "Add camera",
+                  onTap: () {
+                    showAdd(context);
+                  }),
+              DrawerTile(
+                  text: "About",
+                  onTap: () {
+                    showAbout(context);
+                  }),
+              DrawerTile(
+                  text: "Logout",
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, Login.route);
+                  }),
+            ],
+          ),
         ),
       ),
     );

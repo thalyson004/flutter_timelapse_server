@@ -1,16 +1,30 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/camera.dart';
 import '../widgets/camera_card.dart';
 
 class DB extends ChangeNotifier {
-  static final List<Camera> _cameras = [
-    Camera(ip: "192.168.1.111"),
-    //CameraCard(ip: "192.168.1.112"),
-    Camera(ip: "192.168.1.113"),
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  final List<Camera> _cameras = [
+    // Camera(ip: "192.168.1.111"),
+    // CameraCard(ip: "192.168.1.112"),
+    // Camera(ip: "192.168.1.113"),
   ];
+
+  Future<String> getServerIp() async {
+    final SharedPreferences prefs = await _prefs;
+    String serverIp = prefs.getString("serverIp") ?? "";
+    return serverIp;
+  }
+
+  Future<void> setServerIp(String ip) async {
+    final SharedPreferences prefs = await _prefs;
+    await prefs.setString("serverIp", ip);
+  }
 
   List<Camera> get cameras => _cameras;
 

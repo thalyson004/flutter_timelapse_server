@@ -17,6 +17,20 @@ class _LoginState extends State<Login> {
   final TextEditingController controller = TextEditingController();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      String serverIp =
+          await Provider.of<DB>(context, listen: false).getServerIp();
+      setState(() {
+        controller.text = serverIp;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.pink,
@@ -89,6 +103,8 @@ class _LoginState extends State<Login> {
                     print("Server up: $up");
                     if (up) {
                       API.serverIp = controller.text;
+                      Provider.of<DB>(context, listen: false)
+                          .setServerIp(controller.text);
                       Navigator.pushReplacementNamed(context, Home.route);
                     } else {
                       showError(context);

@@ -23,10 +23,12 @@ class _HomeState extends State<Home> {
     return Scaffold(
       drawer: const MyDrawer(),
       appBar: const MyBar(),
-      body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-        color: Colors.pink,
-        child: Provider.of<DB>(context, listen: true).cameraCardsInRows,
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+          color: Colors.pink,
+          child: Provider.of<DB>(context, listen: true).cameraCardsInRows,
+        ),
       ),
     );
   }
