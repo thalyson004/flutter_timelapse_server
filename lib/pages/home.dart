@@ -16,7 +16,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  void initState() {}
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      Provider.of<DB>(context, listen: false).initCameras();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

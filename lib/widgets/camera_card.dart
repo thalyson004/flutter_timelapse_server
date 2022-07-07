@@ -16,6 +16,7 @@ class CameraCard extends StatefulWidget {
 class _CameraCardState extends State<CameraCard> {
   ExtendedNetworkImageProvider image = ExtendedNetworkImageProvider("");
   String text = "";
+  late Timer timer;
   //NetworkImage("http://${widget.ip}/capture");
 
   ExtendedNetworkImageProvider getImage() {
@@ -31,28 +32,41 @@ class _CameraCardState extends State<CameraCard> {
   @override
   void initState() {
     image = getImage();
+    String hour = DateTime.now().toLocal().hour.toString().padLeft(2, '0');
+    String minute = DateTime.now().toLocal().minute.toString().padLeft(2, '0');
+    String second = DateTime.now().toLocal().second.toString().padLeft(2, '0');
+    text = "$hour:$minute:$second";
+
     super.initState();
 
-    Timer.periodic(const Duration(seconds: 1), (Timer timer) async {
-      print("Update camera ${widget.ip}");
-      final tempImage = getImage();
-      setState(() {
-        text = DateTime.now().toLocal().toString();
-      });
-    });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      timer = Timer.periodic(const Duration(seconds: 10), (Timer timer) async {
+        final tempImage = getImage();
+        String hour = DateTime.now().toLocal().hour.toString().padLeft(2, '0');
+        String minute =
+            DateTime.now().toLocal().minute.toString().padLeft(2, '0');
+        String second =
+            DateTime.now().toLocal().second.toString().padLeft(2, '0');
 
-    Timer.periodic(const Duration(seconds: 5), (Timer timer) async {
-      final tempImage = getImage();
-      setState(() {
-        image = tempImage;
+        setState(() {
+          image = tempImage;
+          text = "$hour:$minute:$second";
+        });
       });
     });
   }
 
   @override
+  void dispose() {
+    super.dispose();
+
+    timer.cancel();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double side = (width / 3) - 3 * 2 * 8;
+    double side = (width / 2) - 2 * 2 * 8;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Stack(

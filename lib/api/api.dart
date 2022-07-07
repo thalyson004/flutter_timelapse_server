@@ -25,4 +25,18 @@ class API {
 
     return true;
   }
+
+  static Future<Response> getJobs() async {
+    late Response response;
+
+    final dio = Dio();
+    try {
+      response = await dio.get("$_serverIp/job/list");
+    } catch (e) {
+      print("Error");
+      rethrow;
+    }
+
+    return response;
+  }
 }
