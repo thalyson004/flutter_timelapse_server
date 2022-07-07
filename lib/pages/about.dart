@@ -32,7 +32,11 @@ Widget aboutDialog(BuildContext context) {
                       padding: EdgeInsets.symmetric(vertical: 20),
                       child: Text(
                         "About",
-                        style: TextStyle(fontSize: 20, color: Colors.white),
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     )
                   ],
@@ -44,7 +48,7 @@ Widget aboutDialog(BuildContext context) {
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     child: Text(
                       "This is a IoT homework.\n\n\n" +
-                          "Team: Thalyson Gomes\n" +
+                          "Student: Thalyson Gomes\n" +
                           "Professor: Rafael Gomes",
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
