@@ -39,4 +39,14 @@ class API {
 
     return response;
   }
+
+  static Future<void> addJob(String ip, String interval) async {
+    final dio = Dio();
+    await dio.get("$_serverIp/job/add/$ip/$interval");
+  }
+
+  static Future<void> removeJob(String ip) async {
+    final dio = Dio();
+    await dio.get("$_serverIp/job/remove/$ip");
+  }
 }
