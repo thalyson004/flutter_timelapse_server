@@ -4,25 +4,24 @@ import 'package:provider/provider.dart';
 
 import '../db/db.dart';
 
-void showAdd(BuildContext context) {
+void showRemove(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return addDialog(context);
+      return removeDialog(context);
     },
   );
 }
 
-Widget addDialog(BuildContext context) {
+Widget removeDialog(BuildContext context) {
   final TextEditingController ipController = TextEditingController();
-  final TextEditingController intervalController = TextEditingController();
 
   return Dialog(
     backgroundColor: Colors.transparent,
     //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
     child: ConstrainedBox(
       constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.4,
+        maxHeight: MediaQuery.of(context).size.height * 0.3,
         minHeight: MediaQuery.of(context).size.height * 0.1,
         minWidth: MediaQuery.of(context).size.width * 0.1,
         maxWidth: MediaQuery.of(context).size.width * 0.4,
@@ -44,7 +43,7 @@ Widget addDialog(BuildContext context) {
                     child: Row(
                       children: const [
                         Text(
-                          "Add camera",
+                          "Remove camera",
                           style: TextStyle(fontSize: 20, color: Colors.white),
                         )
                       ],
@@ -61,13 +60,6 @@ Widget addDialog(BuildContext context) {
                         MyTextInput(
                           controller: ipController,
                           hitText: "Ip Address",
-                        ),
-                        const Divider(
-                          height: 20,
-                        ),
-                        MyTextInput(
-                          controller: intervalController,
-                          hitText: "Interval",
                         ),
                       ],
                     ),
@@ -94,12 +86,12 @@ Widget addDialog(BuildContext context) {
                     ),
                     TextButton(
                       child: const Text(
-                        "ADD",
+                        "REMOVE",
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                       onPressed: () {
-                        Provider.of<DB>(context, listen: false).addCamera(
-                            ipController.text, intervalController.text);
+                        Provider.of<DB>(context, listen: false)
+                            .removeCamera(ipController.text);
                         Navigator.of(context).pop();
                       },
                     ),
