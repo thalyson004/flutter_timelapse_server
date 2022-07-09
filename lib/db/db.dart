@@ -67,8 +67,13 @@ class DB extends ChangeNotifier {
     );
   }
 
-  void addCamera(String ip, String interval) {
-    _cameras.add(Camera(ip: ip));
+  Future<void> addCamera(String ip, String interval) async {
+    await API.addJob(ip, interval);
+    initCameras();
+  }
+
+  Future<void> removeCamera(String ip) async {
+    await API.removeJob(ip);
     initCameras();
   }
 }

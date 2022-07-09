@@ -3,6 +3,7 @@ import 'package:flutter_timelapse/pages/add.dart';
 
 import '../pages/about.dart';
 import '../pages/login.dart';
+import '../pages/remove.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -24,6 +25,11 @@ class MyDrawer extends StatelessWidget {
                   text: "Add camera",
                   onTap: () {
                     showAdd(context);
+                  }),
+              DrawerTile(
+                  text: "Remove camera",
+                  onTap: () {
+                    showRemove(context);
                   }),
               DrawerTile(
                   text: "About",
